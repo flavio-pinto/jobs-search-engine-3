@@ -16,7 +16,7 @@ export const addToFavoritesAction = (data) => {
   };
 }
 
-export const getJobsAction = async(params) => {
+export const getCompanyJobsAction = async(params) => {
   try {
     const response = await fetch('https://strive-jobs-api.herokuapp.com/jobs?company=' + params.companyName)
     if (response.ok) {

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Job from './Job'
 import { useParams } from 'react-router-dom'
-import { getJobsAction } from '../redux/actions'
+import { getCompanyJobsAction } from '../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 const CompanySearchResults = () => {
@@ -11,7 +11,7 @@ const CompanySearchResults = () => {
   const jobsFetched = useSelector((state) => state.jobs)
 
   useEffect(() => {
-    dispatch(getJobsAction(params))
+    dispatch(getCompanyJobsAction(params))
   }, [])
 
   return (
