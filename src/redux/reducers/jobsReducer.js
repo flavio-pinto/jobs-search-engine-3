@@ -1,6 +1,7 @@
 import {
   GET_JOBS,
   GET_COMPANY_JOBS,
+  SET_COMPANY_NAME,
   QUERY_UPDATE,
   GET_JOBS_LOADING,
   GET_JOBS_ERROR,
@@ -8,8 +9,9 @@ import {
 
 const initialState = {
   content: [],
+  companyName: "",
   companyJobs: [],
-  query: '',
+  query: "",
   loading: false,
   error: false,
 };
@@ -24,13 +26,18 @@ const jobsReducer = (state = initialState, action) => {
     case GET_COMPANY_JOBS:
       return {
         ...state,
-        companyJobs: action.payload,
+        companyJobs: action.payload.data,
       };
-      case QUERY_UPDATE:
-        return {
-          ...state,
-          query: action.payload,
-        };
+    case SET_COMPANY_NAME:
+      return {
+        ...state,
+        companyName: action.payload,
+      };
+    case QUERY_UPDATE:
+      return {
+        ...state,
+        query: action.payload,
+      };
     case GET_JOBS_LOADING:
       return {
         ...state,

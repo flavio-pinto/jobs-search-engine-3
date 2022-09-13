@@ -3,6 +3,7 @@ export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const GET_JOBS = 'GET_JOBS';
 export const GET_JOBS_ERROR = 'GET_BOOKS_ERROR'
 export const GET_JOBS_LOADING = 'GET_BOOKS_LOADING'
+export const SET_COMPANY_NAME = "SET_COMPANY_NAME";
 export const GET_COMPANY_JOBS = 'GET_COMPANY_JOBS';
 export const QUERY_UPDATE = 'QUERY_UPDATE';
 
@@ -23,21 +24,25 @@ export const addToFavoritesAction = (data) => {
 
 
 
-export const getCompanyJobsAction = async(params) => {
-  try {
-    const response = await fetch('https://strive-jobs-api.herokuapp.com/jobs?company=' + params.companyName)
-    if (response.ok) {
-      const data = await response.json()
-      dispatchEvent({
-        type: GET_COMPANY_JOBS,
-        payload: data
-      })
-    } else {
-      alert('Error fetching results')
+export const getCompanyJobsAction = () => {
+  const baseEndpoint = "https://strive-jobs-api.herokuapp.com/jobs?company=";
+  return async(dispatch, getState) => {
+    try {
+      const response = await fetch(baseEndpoint + getState().jobs.companyName)
+      if (response.ok) {
+        const data = await response.json()
+        dispatch({
+          type: GET_COMPANY_JOBS,
+          payload: data
+        })
+      } else {
+        alert('Error fetching results')
+      }
+    } catch (error) {
+      console.log(error)
     }
-  } catch (error) {
-    console.log(error)
   }
+  
 }
 
 export const getJobsAction = () => {
